@@ -1,6 +1,6 @@
-package com.yuanex.payment.response.offline;
+package com.yuansfer.payment.response.offline;
 
-import com.yuanex.payment.response.YuanpayResponse;
+import com.yuansfer.payment.response.YuanpayResponse;
 
 import net.sf.json.JSONArray;
 

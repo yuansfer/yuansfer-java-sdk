@@ -1,6 +1,6 @@
 package common;
-import com.yuanex.payment.config.YuanpayConfig;
-import com.yuanex.payment.enums.EnviromentEnums;
+import com.yuansfer.payment.config.YuanpayConfig;
+import com.yuansfer.payment.enums.EnviromentEnums;
 
 public class InitYuanpayConfig {
 

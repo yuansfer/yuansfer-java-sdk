@@ -1,6 +1,6 @@
-package com.yuanex.payment.response.mobile;
+package com.yuansfer.payment.response.mobile;
 
-import com.yuanex.payment.response.YuanpayResponse;
+import com.yuansfer.payment.response.YuanpayResponse;
 
 import net.sf.json.JSONObject;
 

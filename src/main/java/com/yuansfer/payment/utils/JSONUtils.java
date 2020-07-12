@@ -1,4 +1,4 @@
-package com.yuanex.payment.utils;
+package com.yuansfer.payment.utils;
 
 import org.apache.log4j.Logger;
 

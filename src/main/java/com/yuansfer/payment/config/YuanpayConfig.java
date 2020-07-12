@@ -1,12 +1,12 @@
-package com.yuanex.payment.config;
+package com.yuansfer.payment.config;
 
 import java.io.Serializable;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuanex.payment.enums.EnviromentEnums;
-import com.yuanex.payment.exception.YuanpayException;
+import com.yuansfer.payment.enums.EnviromentEnums;
+import com.yuansfer.payment.exception.YuanpayException;
 
 /**
  * 圆支付配置信息

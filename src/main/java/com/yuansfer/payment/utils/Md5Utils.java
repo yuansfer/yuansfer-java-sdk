@@ -1,4 +1,4 @@
-package com.yuanex.payment.utils;
+package com.yuansfer.payment.utils;
 
 import java.io.Serializable;
 import java.security.MessageDigest;

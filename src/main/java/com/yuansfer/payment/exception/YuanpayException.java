@@ -1,4 +1,4 @@
-package com.yuanex.payment.exception;
+package com.yuansfer.payment.exception;
 
 public class YuanpayException extends RuntimeException {
 	private static final long serialVersionUID = -1177057547937718630L;

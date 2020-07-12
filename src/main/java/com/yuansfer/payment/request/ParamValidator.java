@@ -1,4 +1,4 @@
-package com.yuanex.payment.request;
+package com.yuansfer.payment.request;
 
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuanex.payment.exception.YuanpayException;
+import com.yuansfer.payment.exception.YuanpayException;
 
 public class ParamValidator {
 	

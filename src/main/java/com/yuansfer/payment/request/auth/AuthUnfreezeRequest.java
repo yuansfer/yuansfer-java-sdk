@@ -1,12 +1,12 @@
-package com.yuanex.payment.request.auth;
+package com.yuansfer.payment.request.auth;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuanex.payment.exception.YuanpayException;
-import com.yuanex.payment.request.ParamValidator;
-import com.yuanex.payment.request.RequestConstants;
-import com.yuanex.payment.request.YuanpayRequest;
-import com.yuanex.payment.response.auth.AuthUnfreezeResponse;
+import com.yuansfer.payment.exception.YuanpayException;
+import com.yuansfer.payment.request.ParamValidator;
+import com.yuansfer.payment.request.RequestConstants;
+import com.yuansfer.payment.request.YuanpayRequest;
+import com.yuansfer.payment.response.auth.AuthUnfreezeResponse;
 
 import net.sf.json.JSONObject;
 

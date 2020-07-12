@@ -1,4 +1,4 @@
-package com.yuanex.payment.client;
+package com.yuansfer.payment.client;
 
 import java.util.Map;
 
@@ -11,12 +11,12 @@ import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.yuanex.payment.config.YuanpayConfig;
-import com.yuanex.payment.exception.YuanpayException;
-import com.yuanex.payment.request.RequestBody;
-import com.yuanex.payment.request.YuanpayRequest;
-import com.yuanex.payment.response.YuanpayResponse;
-import com.yuanex.payment.utils.HTTPSSecureProtocolSocketFactory;
+import com.yuansfer.payment.config.YuanpayConfig;
+import com.yuansfer.payment.exception.YuanpayException;
+import com.yuansfer.payment.request.RequestBody;
+import com.yuansfer.payment.request.YuanpayRequest;
+import com.yuansfer.payment.response.YuanpayResponse;
+import com.yuansfer.payment.utils.HTTPSSecureProtocolSocketFactory;
 
 import net.sf.json.JSONObject;
 

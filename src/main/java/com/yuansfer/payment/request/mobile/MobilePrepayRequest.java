@@ -1,15 +1,15 @@
-package com.yuanex.payment.request.mobile;
+package com.yuansfer.payment.request.mobile;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuanex.payment.enums.CurrencyEnums;
-import com.yuanex.payment.enums.TerminalEnums;
-import com.yuanex.payment.enums.VendorEnums;
-import com.yuanex.payment.exception.YuanpayException;
-import com.yuanex.payment.request.ParamValidator;
-import com.yuanex.payment.request.RequestConstants;
-import com.yuanex.payment.request.YuanpayRequest;
-import com.yuanex.payment.response.mobile.MobilePrepayResponse;
+import com.yuansfer.payment.enums.CurrencyEnums;
+import com.yuansfer.payment.enums.TerminalEnums;
+import com.yuansfer.payment.enums.VendorEnums;
+import com.yuansfer.payment.exception.YuanpayException;
+import com.yuansfer.payment.request.ParamValidator;
+import com.yuansfer.payment.request.RequestConstants;
+import com.yuansfer.payment.request.YuanpayRequest;
+import com.yuansfer.payment.response.mobile.MobilePrepayResponse;
 
 import net.sf.json.JSONObject;
 

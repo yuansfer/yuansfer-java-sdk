@@ -1,4 +1,4 @@
-package com.yuanex.payment.enums;
+package com.yuansfer.payment.enums;
 
 public enum CurrencyEnums {
 	USD("USD"),					//美金

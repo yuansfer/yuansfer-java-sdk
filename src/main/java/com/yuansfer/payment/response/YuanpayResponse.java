@@ -1,4 +1,4 @@
-package com.yuanex.payment.response;
+package com.yuansfer.payment.response;
 
 import java.io.Serializable;
 

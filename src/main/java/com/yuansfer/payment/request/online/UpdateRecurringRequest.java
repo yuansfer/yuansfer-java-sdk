@@ -1,11 +1,11 @@
-package com.yuanex.payment.request.online;
+package com.yuansfer.payment.request.online;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuanex.payment.exception.YuanpayException;
-import com.yuanex.payment.request.RequestConstants;
-import com.yuanex.payment.request.YuanpayRequest;
-import com.yuanex.payment.response.online.UpdateRecurringResponse;
+import com.yuansfer.payment.exception.YuanpayException;
+import com.yuansfer.payment.request.RequestConstants;
+import com.yuansfer.payment.request.YuanpayRequest;
+import com.yuansfer.payment.response.online.UpdateRecurringResponse;
 
 import net.sf.json.JSONObject;
 

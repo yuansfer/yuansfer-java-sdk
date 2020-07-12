@@ -1,4 +1,4 @@
-package com.yuanex.payment.request;
+package com.yuansfer.payment.request;
 
 public interface RequestConstants {
 	/*

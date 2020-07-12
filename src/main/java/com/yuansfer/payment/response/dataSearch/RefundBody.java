@@ -1,4 +1,4 @@
-package com.yuanex.payment.response.dataSearch;
+package com.yuansfer.payment.response.dataSearch;
 
 public class RefundBody {
 	

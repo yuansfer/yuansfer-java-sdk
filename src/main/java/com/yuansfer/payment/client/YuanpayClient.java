@@ -1,8 +1,8 @@
-package com.yuanex.payment.client;
+package com.yuansfer.payment.client;
 
-import com.yuanex.payment.exception.YuanpayException;
-import com.yuanex.payment.request.YuanpayRequest;
-import com.yuanex.payment.response.YuanpayResponse;
+import com.yuansfer.payment.exception.YuanpayException;
+import com.yuansfer.payment.request.YuanpayRequest;
+import com.yuansfer.payment.response.YuanpayResponse;
 
 public interface YuanpayClient {
 	
