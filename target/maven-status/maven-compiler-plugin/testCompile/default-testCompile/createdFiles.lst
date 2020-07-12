@@ -1,0 +1,5 @@
+mobile/MobileTest.class
+dataSearch/DataSearchTest.class
+offline/OfflineTest.class
+common/InitYuanpayConfig.class
+online/OnlineTest.class
