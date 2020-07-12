@@ -8,6 +8,8 @@ package com.yuanex.payment.enums;
 public enum TerminalEnums {
 	ONLINE("ONLINE"),
 	WAP("WAP"),
+	APP("APP"),
+	MINIPROGRAM("MINIPROGRAM"),
 	;
 	private String value;
 	

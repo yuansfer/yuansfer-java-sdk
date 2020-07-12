@@ -14,9 +14,9 @@ public class MobileTest {
 
 	
 	public static void main(String[] args) {
-//		prepay();
+		prepay();
 		
-		expresspay();
+//		expresspay();
 	}
 	
 	
@@ -41,16 +41,47 @@ public class MobileTest {
 	public static void prepay() {
 		YuanpayClient client = new YuanpayV200Client(InitYuanpayConfig.initMerchantConfig());
 		
+		
+		/*
+		 * Miniprogram of Wechat
+		 */
+//		MobilePrepayRequest request = new MobilePrepayRequest();
+//		request.setAmount("0.01")
+//				.setCurrency("USD")
+//				.setDescription("testDescription")
+//				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
+//				.setNote("testNote")
+//				.setOpenid("ocBgh5fnabrf-pxPgCWXlq2mOvG8")
+//				.setReference(System.nanoTime()+"")
+//				.setTerminal("MINIPROGRAM")
+//				.setVendor("wechatpay");
+		
+		
+		/*
+		 * APP of Wechat
+		 */
+//		MobilePrepayRequest request = new MobilePrepayRequest();
+//		request.setAmount("0.01")
+//				.setCurrency("USD")
+//				.setDescription("testDescription")
+//				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
+//				.setNote("testNote")
+//				.setReference(System.nanoTime()+"")
+//				.setTerminal("APP")
+//				.setVendor("wechatpay");
+		
+		/*
+		 * APP of Alipay
+		 */
 		MobilePrepayRequest request = new MobilePrepayRequest();
 		request.setAmount("0.01")
 				.setCurrency("USD")
 				.setDescription("testDescription")
 				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
 				.setNote("testNote")
-				.setOpenid("ocBgh5fnabrf-pxPgCWXlq2mOvG8")
 				.setReference(System.nanoTime()+"")
-				.setTerminal("MINIPROGRAM")
-				.setVendor("wechatpay");
+				.setTerminal("APP")
+				.setVendor("alipay");
 		
 		MobilePrepayResponse response = client.execute(request);
 		System.out.println(JSONObject.fromObject(response));

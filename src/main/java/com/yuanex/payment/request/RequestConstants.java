@@ -42,12 +42,17 @@ public interface RequestConstants {
 	
 	
 	/*
+	 * 预授权
+	 */
+	String AUTH_VOUCHER_CREATE = "/app-auth/v2/voucher-create";
+	String AUTH_FREEAE = "/app-auth/v2/auth-freeze";
+	String AUTH_UNFREEZE = "/app-auth/v2/auth-unfreeze";
+	String AUTH_CAPTURE = "/app-auth/v2/auth-capture";
+	String AUTH_DETAIL_QUERY = "/app-auth/v2/auth-detail-query";
+	
+	/*
 	 * 第三方授权支付
 	 */
 	String THIRDPART_ACQUIRE_CREATE = "/app-thirdpart/v2/acquire-create";
 	
-	/*
-	 * debug
-	 */
-	String DEBUG_INFO_ADD = "/app-sdk-debuginfo/add";
 }

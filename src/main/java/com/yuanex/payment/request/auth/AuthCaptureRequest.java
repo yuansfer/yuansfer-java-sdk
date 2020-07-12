@@ -6,53 +6,45 @@ import com.yuanex.payment.exception.YuanpayException;
 import com.yuanex.payment.request.ParamValidator;
 import com.yuanex.payment.request.RequestConstants;
 import com.yuanex.payment.request.YuanpayRequest;
-import com.yuanex.payment.response.auth.AuthVoucherCreateResponse;
+import com.yuanex.payment.response.auth.AuthCaptureResponse;
 
 import net.sf.json.JSONObject;
 
-public class AuthVoucherCreateRequest extends YuanpayRequest<AuthVoucherCreateResponse> {
+public class AuthCaptureRequest extends YuanpayRequest<AuthCaptureResponse> {
 
-	private String outAuthInfoNo;					//商户系统预授权号
-	private String outAuthDetailNo;					//商户系统预授权操作号
-	private String vendor;
+	private String outAuthInfoNo;
+	private String outAuthDetailNo;
 	private String amount;
-	private String currency;
+	private String ipnUrl;
 	
 	public String getOutAuthInfoNo() {
 		return outAuthInfoNo;
 	}
-	public AuthVoucherCreateRequest setOutAuthInfoNo(String outAuthInfoNo) {
+	public AuthCaptureRequest setOutAuthInfoNo(String outAuthInfoNo) {
 		this.outAuthInfoNo = outAuthInfoNo;
 		return this;
 	}
 	public String getOutAuthDetailNo() {
 		return outAuthDetailNo;
 	}
-	public AuthVoucherCreateRequest setOutAuthDetailNo(String outAuthDetailNo) {
+	public AuthCaptureRequest setOutAuthDetailNo(String outAuthDetailNo) {
 		this.outAuthDetailNo = outAuthDetailNo;
-		return this;
-	}
-	public String getVendor() {
-		return vendor;
-	}
-	public AuthVoucherCreateRequest setVendor(String vendor) {
-		this.vendor = vendor;
 		return this;
 	}
 	public String getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public AuthCaptureRequest setAmount(String amount) {
 		this.amount = amount;
-	}
-	public String getCurrency() {
-		return currency;
-	}
-	public AuthVoucherCreateRequest setCurrency(String currency) {
-		this.currency = currency;
 		return this;
 	}
-	
+	public String getIpnUrl() {
+		return ipnUrl;
+	}
+	public AuthCaptureRequest setIpnUrl(String ipnUrl) {
+		this.ipnUrl = ipnUrl;
+		return this;
+	}
 	
 	@Override
 	protected void dataValidate() {
@@ -62,20 +54,18 @@ public class AuthVoucherCreateRequest extends YuanpayRequest<AuthVoucherCreateRe
 		if (StringUtils.isEmpty(this.outAuthDetailNo)) {
 			throw new YuanpayException("outAuthDetailNo missing");
 		}
-		if (StringUtils.isEmpty(this.vendor)) {
-			throw new YuanpayException("vendor missing");
-		}
 		ParamValidator.amountValidate("amount", this.amount);
 	}
+	
 	@Override
 	protected String getAPIUrl(String env) {
 		String urlPrefix = getUrlPrefix(env);
-		String url = urlPrefix + RequestConstants.AUTH_VOUCHER_CREATE;
+		String url = urlPrefix + RequestConstants.AUTH_CAPTURE;
 		return url;
 	}
 	@Override
-	public AuthVoucherCreateResponse convertResponse(String ret) {
-		AuthVoucherCreateResponse response = new AuthVoucherCreateResponse();
+	public AuthCaptureResponse convertResponse(String ret) {
+		AuthCaptureResponse response = new AuthCaptureResponse();
 		JSONObject json = JSONObject.fromObject(ret);
 		response.setRetCode(json.getString("ret_code"));
 		response.setRetMsg(json.getString("ret_msg"));
@@ -85,6 +75,4 @@ public class AuthVoucherCreateRequest extends YuanpayRequest<AuthVoucherCreateRe
 		}
 		return response;
 	}
-	
-	
 }

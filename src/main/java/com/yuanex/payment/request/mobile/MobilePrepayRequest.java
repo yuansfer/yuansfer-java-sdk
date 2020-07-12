@@ -3,6 +3,7 @@ package com.yuanex.payment.request.mobile;
 import org.apache.commons.lang.StringUtils;
 
 import com.yuanex.payment.enums.CurrencyEnums;
+import com.yuanex.payment.enums.TerminalEnums;
 import com.yuanex.payment.enums.VendorEnums;
 import com.yuanex.payment.exception.YuanpayException;
 import com.yuanex.payment.request.ParamValidator;
@@ -152,9 +153,14 @@ public class MobilePrepayRequest extends YuanpayRequest<MobilePrepayResponse> {
 			throw new YuanpayException("data error: vendor.");
 		}
 		
+		if (StringUtils.isEmpty(this.terminal)) {
+			throw new YuanpayException("terminal missing");
+		}
+		
 		//openid校验
-		if (VendorEnums.WECHATPAY.getValue().equals(this.vendor)) {
-			if (StringUtils.isEmpty(this.openid)) {
+		if (VendorEnums.WECHATPAY.getValue().equals(this.vendor)){
+			if (TerminalEnums.MINIPROGRAM.getValue().equals(this.terminal)
+					&& StringUtils.isEmpty(this.openid)) {
 				throw new YuanpayException("openid missing");
 			}
 		}

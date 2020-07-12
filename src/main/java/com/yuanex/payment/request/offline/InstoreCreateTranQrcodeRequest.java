@@ -20,7 +20,6 @@ public class InstoreCreateTranQrcodeRequest extends YuanpayRequest<InstoreCreate
 	private String ipnUrl;								//异步回调地址
 	private String needQrcode;							//是否需要生成二维码图片，默认为true
 	private Integer timeout;							//超市时间
-	private @Deprecated String preAuth;					//预付款标志  true是， false则为普通订单, 默认为false
 	
 	public String getCurrency() {
 		return currency;
@@ -76,14 +75,6 @@ public class InstoreCreateTranQrcodeRequest extends YuanpayRequest<InstoreCreate
 		return this;
 	}
 
-	public String getPreAuth() {
-		return preAuth;
-	}
-
-	public InstoreCreateTranQrcodeRequest setPreAuth(String preAuth) {
-		this.preAuth = preAuth;
-		return this;
-	}
 
 	public Integer getTimeout() {
 		return timeout;
@@ -130,23 +121,26 @@ public class InstoreCreateTranQrcodeRequest extends YuanpayRequest<InstoreCreate
 		if (null != json.get("ret_msg")) {
 			response.setRetMsg(json.getString("ret_msg"));
 		}
-		if (null != json.get("transactionNo")) {
-			response.setTransactionNo(json.getString("transactionNo"));
-		}
-		if (null != json.get("reference")) {
-			response.setReference(json.getString("reference"));
-		}
-		if (null != json.get("amount")) {
-			response.setAmount(json.getString("amount"));
-		}
-		if (null != json.get("timeout")) {
-			response.setTimeout(json.getInt("timeout"));
-		}
-		if (null != json.get("deepLink")) {
-			response.setDeepLink(json.getString("deepLink"));
-		}
-		if (null != json.get("qrcodeUrl")) {
-			response.setQrcodeUrl(json.getString("qrcodeUrl"));
+		
+		if (StringUtils.isNotEmpty(response.getRetCode()) && "000100".equals(response.getRetCode())) {
+			if (null != json.get("transactionNo")) {
+				response.setTransactionNo(json.getString("transactionNo"));
+			}
+			if (null != json.get("reference")) {
+				response.setReference(json.getString("reference"));
+			}
+			if (null != json.get("amount")) {
+				response.setAmount(json.getString("amount"));
+			}
+			if (null != json.get("timeout")) {
+				response.setTimeout(json.getInt("timeout"));
+			}
+			if (null != json.get("deepLink")) {
+				response.setDeepLink(json.getString("deepLink"));
+			}
+			if (null != json.get("qrcodeUrl")) {
+				response.setQrcodeUrl(json.getString("qrcodeUrl"));
+			}
 		}
 		return response;
 	}

@@ -3,7 +3,6 @@ package com.yuanex.payment.request.offline;
 import org.apache.commons.lang.StringUtils;
 
 import com.yuanex.payment.enums.CurrencyEnums;
-import com.yuanex.payment.enums.TrueFalseEnums;
 import com.yuanex.payment.exception.YuanpayException;
 import com.yuanex.payment.request.ParamValidator;
 import com.yuanex.payment.request.RequestConstants;
@@ -17,7 +16,6 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 	private String amount;								//美金金额
 	private String currency;							//币种
 	private String reference;							//商户支付流水号
-	private @Deprecated String preAuth;					//是否是预付款订单 true是， false则为普通订单, 默认为false
 	
 	public String getAmount() {
 		return amount;
@@ -46,15 +44,6 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 		return this;
 	}
 	
-	public String getPreAuth() {
-		return preAuth;
-	}
-
-	public InstoreAddRequest setPreAuth(String preAuth) {
-		this.preAuth = preAuth;
-		return this;
-	}
-
 
 	@Override
 	protected void dataValidate() {
@@ -66,9 +55,6 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 		}
 		if (!CurrencyEnums.USD.getValue().equals(this.currency)) {
 			throw new YuanpayException("only USD is supported yet.");
-		}
-		if (!TrueFalseEnums.containValidate(this.preAuth)) {
-			throw new YuanpayException("data error:preAuth");
 		}
 	}
 
