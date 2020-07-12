@@ -1,9 +1,9 @@
 package online;
 
-import com.yuansfer.payment.client.YuanpayClient;
-import com.yuansfer.payment.client.YuanpayV200Client;
-import com.yuansfer.payment.request.online.OnlineSecurepayRequest;
-import com.yuansfer.payment.response.online.OnlineSecurepayResponse;
+import com.yuanex.payment.client.YuanpayClient;
+import com.yuanex.payment.client.YuanpayV200Client;
+import com.yuanex.payment.request.online.OnlineSecurepayRequest;
+import com.yuanex.payment.response.online.OnlineSecurepayResponse;
 
 import common.InitYuanpayConfig;
 import net.sf.json.JSONArray;

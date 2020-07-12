@@ -1,11 +1,11 @@
 package mobile;
 
-import com.yuansfer.payment.client.YuanpayClient;
-import com.yuansfer.payment.client.YuanpayV200Client;
-import com.yuansfer.payment.request.mobile.ExpressPayRequest;
-import com.yuansfer.payment.request.mobile.MobilePrepayRequest;
-import com.yuansfer.payment.response.mobile.ExpressPayResponse;
-import com.yuansfer.payment.response.mobile.MobilePrepayResponse;
+import com.yuanex.payment.client.YuanpayClient;
+import com.yuanex.payment.client.YuanpayV200Client;
+import com.yuanex.payment.request.mobile.ExpressPayRequest;
+import com.yuanex.payment.request.mobile.MobilePrepayRequest;
+import com.yuanex.payment.response.mobile.ExpressPayResponse;
+import com.yuanex.payment.response.mobile.MobilePrepayResponse;
 
 import common.InitYuanpayConfig;
 import net.sf.json.JSONObject;

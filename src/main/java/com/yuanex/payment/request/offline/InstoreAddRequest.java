@@ -1,0 +1,95 @@
+package com.yuanex.payment.request.offline;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.yuanex.payment.enums.CurrencyEnums;
+import com.yuanex.payment.enums.TrueFalseEnums;
+import com.yuanex.payment.exception.YuanpayException;
+import com.yuanex.payment.request.ParamValidator;
+import com.yuanex.payment.request.RequestConstants;
+import com.yuanex.payment.request.YuanpayRequest;
+import com.yuanex.payment.response.offline.InstoreAddResponse;
+
+import net.sf.json.JSONObject;
+
+public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
+
+	private String amount;								//美金金额
+	private String currency;							//币种
+	private String reference;							//商户支付流水号
+	private @Deprecated String preAuth;					//是否是预付款订单 true是， false则为普通订单, 默认为false
+	
+	public String getAmount() {
+		return amount;
+	}
+
+	public InstoreAddRequest setAmount(String amount) {
+		this.amount = amount;
+		return this;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public InstoreAddRequest setCurrency(String currency) {
+		this.currency = currency;
+		return this;
+	}
+
+	public String getReference() {
+		return reference;
+	}
+
+	public InstoreAddRequest setReference(String reference) {
+		this.reference = reference;
+		return this;
+	}
+	
+	public String getPreAuth() {
+		return preAuth;
+	}
+
+	public InstoreAddRequest setPreAuth(String preAuth) {
+		this.preAuth = preAuth;
+		return this;
+	}
+
+
+	@Override
+	protected void dataValidate() {
+		ParamValidator.amountValidate("amount", this.amount);
+		
+		//币种校验
+		if (StringUtils.isEmpty(this.currency)) {
+			throw new YuanpayException("currency missing.");
+		}
+		if (!CurrencyEnums.USD.getValue().equals(this.currency)) {
+			throw new YuanpayException("only USD is supported yet.");
+		}
+		if (!TrueFalseEnums.containValidate(this.preAuth)) {
+			throw new YuanpayException("data error:preAuth");
+		}
+	}
+
+	@Override
+	protected String getAPIUrl(String env) {
+		String urlPrefix = getUrlPrefix(env);
+		String url = urlPrefix + RequestConstants.INSTORE_ADD;
+		return url;
+	}
+
+	@Override
+	public InstoreAddResponse convertResponse(String ret) {
+		InstoreAddResponse response = new InstoreAddResponse();
+		JSONObject json = JSONObject.fromObject(ret);
+		response.setRetCode(json.getString("ret_code"));
+		response.setRetMsg(json.getString("ret_msg"));
+		
+		if (null != json.get("transaction")) {
+			response.setTransaction(json.getJSONObject("transaction"));
+		}
+		return response;
+	}
+
+}
