@@ -9,7 +9,8 @@ import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.yuansfer.payment.config.YuanpayConfig;
 import com.yuansfer.payment.exception.YuanpayException;
@@ -22,16 +23,16 @@ import net.sf.json.JSONObject;
 
 /**
  * 
- * @author zhoukai
+ * @author yuansfer
  * yuanpay客户端
  * 
  * @version 2.0.0
  */
-public class YuanpayV200Client implements YuanpayClient {
-	private static final Logger logger = Logger.getLogger(YuanpayV200Client.class);
+public class YuanpayV300Client implements YuanpayClient {
+	private static final Logger logger = LoggerFactory.getLogger(YuanpayV300Client.class);
 	private YuanpayConfig yuanpayConfig;
 	
-	public YuanpayV200Client(YuanpayConfig yuanpayConfig) {
+	public YuanpayV300Client(YuanpayConfig yuanpayConfig) {
 		this.yuanpayConfig = yuanpayConfig;
 	}
 	

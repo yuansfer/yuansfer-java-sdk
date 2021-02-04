@@ -1,7 +1,7 @@
 package mobile;
 
 import com.yuansfer.payment.client.YuanpayClient;
-import com.yuansfer.payment.client.YuanpayV200Client;
+import com.yuansfer.payment.client.YuanpayV300Client;
 import com.yuansfer.payment.request.mobile.ExpressPayRequest;
 import com.yuansfer.payment.request.mobile.MobilePrepayRequest;
 import com.yuansfer.payment.response.mobile.ExpressPayResponse;
@@ -21,7 +21,7 @@ public class MobileTest {
 	
 	
 	public static void expresspay() {
-		YuanpayClient client = new YuanpayV200Client(InitYuanpayConfig.initMerchantConfig());
+		YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
 		
 		ExpressPayRequest request = new ExpressPayRequest();
 		request.setAmount("0.01")
@@ -31,6 +31,7 @@ public class MobileTest {
 				.setCardNumber("6226388000000095")
 				.setClientIp("127.0.0.1")
 				.setCurrency("USD")
+				.setSettleCurrency("USD")
 				.setReference(System.nanoTime()+"");
 		
 		ExpressPayResponse response = client.execute(request);
@@ -39,7 +40,7 @@ public class MobileTest {
 	
 	
 	public static void prepay() {
-		YuanpayClient client = new YuanpayV200Client(InitYuanpayConfig.initMerchantConfig());
+		YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
 		
 		
 		/*
@@ -48,6 +49,7 @@ public class MobileTest {
 //		MobilePrepayRequest request = new MobilePrepayRequest();
 //		request.setAmount("0.01")
 //				.setCurrency("USD")
+//				.setSettleCurrency("USD")
 //				.setDescription("testDescription")
 //				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
 //				.setNote("testNote")
@@ -63,6 +65,7 @@ public class MobileTest {
 //		MobilePrepayRequest request = new MobilePrepayRequest();
 //		request.setAmount("0.01")
 //				.setCurrency("USD")
+//				.setSettleCurrency("USD")
 //				.setDescription("testDescription")
 //				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
 //				.setNote("testNote")
@@ -76,6 +79,7 @@ public class MobileTest {
 		MobilePrepayRequest request = new MobilePrepayRequest();
 		request.setAmount("0.01")
 				.setCurrency("USD")
+				.setSettleCurrency("USD")
 				.setDescription("testDescription")
 				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
 				.setNote("testNote")

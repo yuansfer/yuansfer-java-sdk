@@ -2,7 +2,6 @@ package com.yuansfer.payment.request.mobile;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuansfer.payment.enums.CurrencyEnums;
 import com.yuansfer.payment.exception.YuanpayException;
 import com.yuansfer.payment.request.ParamValidator;
 import com.yuansfer.payment.request.RequestConstants;
@@ -21,7 +20,7 @@ public class ExpressPayRequest extends YuanpayRequest<ExpressPayResponse> {
 	private String reference;						//商户系统流水号
 	private String clientIp;						//商户系统ip
 	private String currency;						//币种
-
+	private String settleCurrency;
 	
 	
 	public String getCardNumber() {
@@ -96,6 +95,15 @@ public class ExpressPayRequest extends YuanpayRequest<ExpressPayResponse> {
 		return this;
 	}
 
+	public String getSettleCurrency() {
+		return settleCurrency;
+	}
+
+	public ExpressPayRequest setSettleCurrency(String settleCurrency) {
+		this.settleCurrency = settleCurrency;
+		return this;
+	}
+	
 	@Override
 	protected void dataValidate() {
 		if (StringUtils.isEmpty(this.cardNumber)) {
@@ -122,10 +130,9 @@ public class ExpressPayRequest extends YuanpayRequest<ExpressPayResponse> {
 		if (StringUtils.isEmpty(this.currency)) {
 			throw new YuanpayException("currency missing.");
 		}
-		if (!CurrencyEnums.USD.getValue().equals(this.currency)) {
-			throw new YuanpayException("only USD is supported yet.");
+		if (StringUtils.isEmpty(this.settleCurrency)) {
+			throw new YuanpayException("settleCurrency missing");
 		}
-		
 		if (StringUtils.isEmpty(this.reference)) {
 			throw new YuanpayException("reference missing");
 		}
@@ -155,5 +162,4 @@ public class ExpressPayRequest extends YuanpayRequest<ExpressPayResponse> {
 		return response;
 	}
 
-	
 }

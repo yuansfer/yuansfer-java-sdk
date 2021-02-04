@@ -2,11 +2,7 @@ package com.yuansfer.payment.request.mobile;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuansfer.payment.enums.CurrencyEnums;
-import com.yuansfer.payment.enums.TerminalEnums;
-import com.yuansfer.payment.enums.VendorEnums;
 import com.yuansfer.payment.exception.YuanpayException;
-import com.yuansfer.payment.request.ParamValidator;
 import com.yuansfer.payment.request.RequestConstants;
 import com.yuansfer.payment.request.YuanpayRequest;
 import com.yuansfer.payment.response.mobile.MobilePrepayResponse;
@@ -17,8 +13,8 @@ public class MobilePrepayRequest extends YuanpayRequest<MobilePrepayResponse> {
 
 	private String reference;						//商户支付流水号
 	private String amount;							//美金金额
-	private String rmbAmount;						//人民币金额
 	private String currency;						//币种
+	private String settleCurrency;	
 	private String vendor;							//渠道
 	private String terminal;						//客户端类型，包括"MINIPROGRAM","APP" 
 	private String ipnUrl;							//异步回调地址
@@ -44,14 +40,6 @@ public class MobilePrepayRequest extends YuanpayRequest<MobilePrepayResponse> {
 		return this;
 	}
 
-	public String getRmbAmount() {
-		return rmbAmount;
-	}
-
-	public MobilePrepayRequest setRmbAmount(String rmbAmount) {
-		this.rmbAmount = rmbAmount;
-		return this;
-	}
 
 	public String getCurrency() {
 		return currency;
@@ -115,22 +103,23 @@ public class MobilePrepayRequest extends YuanpayRequest<MobilePrepayResponse> {
 		this.note = note;
 		return this;
 	}
+	
+	public String getSettleCurrency() {
+		return settleCurrency;
+	}
+
+	public MobilePrepayRequest setSettleCurrency(String settleCurrency) {
+		this.settleCurrency = settleCurrency;
+		return this;
+	}
 
 
 	@Override
 	protected void dataValidate() {
 		//金额校验
-		if (StringUtils.isEmpty(this.amount) && StringUtils.isEmpty(this.rmbAmount)) {
-			throw new YuanpayException("amount and rmbAmount cannnot be null at the same time.");
-		} else if (StringUtils.isNotEmpty(this.amount) && StringUtils.isNotEmpty(this.rmbAmount)) {
-			throw new YuanpayException("amount and rmbAmount can't exist at the same time.");
-		} else if (StringUtils.isNotEmpty(this.amount)) {
-			
-			ParamValidator.amountValidate("amount", this.amount);
-		} else {
-			ParamValidator.amountValidate("rmbAmount", this.rmbAmount);
-		}
-		
+		if (StringUtils.isEmpty(this.amount)) {
+			throw new YuanpayException("amount missing");
+		}  
 		
 		if (StringUtils.isEmpty(this.reference)) {
 			throw new YuanpayException("reference missing");
@@ -138,19 +127,16 @@ public class MobilePrepayRequest extends YuanpayRequest<MobilePrepayResponse> {
 		
 		//币种校验
 		if (StringUtils.isEmpty(this.currency)) {
-			throw new YuanpayException("currency missing.");
+			throw new YuanpayException("currency missing");
 		}
-		if (!CurrencyEnums.USD.getValue().equals(this.currency)) {
-			throw new YuanpayException("only USD is supported yet.");
+		
+		if (StringUtils.isEmpty(this.settleCurrency)) {
+			throw new YuanpayException("settleCurrency missing");
 		}
 		
 		//vendor校验
 		if (StringUtils.isEmpty(this.vendor)) {
-			throw new YuanpayException("vendor missing.");
-		}
-		boolean vendorFlag = VendorEnums.containValidate(this.vendor);
-		if (!vendorFlag) {
-			throw new YuanpayException("data error: vendor.");
+			throw new YuanpayException("vendor missing");
 		}
 		
 		if (StringUtils.isEmpty(this.terminal)) {
@@ -158,8 +144,8 @@ public class MobilePrepayRequest extends YuanpayRequest<MobilePrepayResponse> {
 		}
 		
 		//openid校验
-		if (VendorEnums.WECHATPAY.getValue().equals(this.vendor)){
-			if (TerminalEnums.MINIPROGRAM.getValue().equals(this.terminal)
+		if ("wechatpay".equals(this.vendor)){
+			if ("MINIPROGRAM".equals(this.terminal)
 					&& StringUtils.isEmpty(this.openid)) {
 				throw new YuanpayException("openid missing");
 			}

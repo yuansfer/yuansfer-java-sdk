@@ -2,7 +2,6 @@ package com.yuansfer.payment.request.offline;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuansfer.payment.enums.CurrencyEnums;
 import com.yuansfer.payment.exception.YuanpayException;
 import com.yuansfer.payment.request.ParamValidator;
 import com.yuansfer.payment.request.RequestConstants;
@@ -15,6 +14,7 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 
 	private String amount;								//美金金额
 	private String currency;							//币种
+	private String settleCurrency;
 	private String reference;							//商户支付流水号
 	
 	public String getAmount() {
@@ -34,6 +34,14 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 		this.currency = currency;
 		return this;
 	}
+	public String getSettleCurrency() {
+		return settleCurrency;
+	}
+
+	public InstoreAddRequest setSettleCurrency(String settleCurrency) {
+		this.settleCurrency = settleCurrency;
+		return this;
+	}
 
 	public String getReference() {
 		return reference;
@@ -43,7 +51,6 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 		this.reference = reference;
 		return this;
 	}
-	
 
 	@Override
 	protected void dataValidate() {
@@ -53,8 +60,8 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 		if (StringUtils.isEmpty(this.currency)) {
 			throw new YuanpayException("currency missing.");
 		}
-		if (!CurrencyEnums.USD.getValue().equals(this.currency)) {
-			throw new YuanpayException("only USD is supported yet.");
+		if (StringUtils.isEmpty(this.settleCurrency)) {
+			throw new YuanpayException("settleCurrency missing");
 		}
 	}
 
@@ -69,13 +76,14 @@ public class InstoreAddRequest  extends YuanpayRequest<InstoreAddResponse> {
 	public InstoreAddResponse convertResponse(String ret) {
 		InstoreAddResponse response = new InstoreAddResponse();
 		JSONObject json = JSONObject.fromObject(ret);
+		if (null != json.get("result")) {
+			response.setResult(json.getJSONObject("result"));
+		}
 		response.setRetCode(json.getString("ret_code"));
 		response.setRetMsg(json.getString("ret_msg"));
-		
-		if (null != json.get("transaction")) {
-			response.setTransaction(json.getJSONObject("transaction"));
-		}
 		return response;
 	}
+
+	
 
 }

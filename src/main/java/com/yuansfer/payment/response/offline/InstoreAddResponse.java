@@ -8,15 +8,14 @@ public class InstoreAddResponse extends YuanpayResponse {
 
 	private static final long serialVersionUID = 2458591733625822127L;
 	
-	private JSONObject transaction;
+	private JSONObject result;
 
-	public JSONObject getTransaction() {
-		return transaction;
+	public JSONObject getResult() {
+		return result;
 	}
 
-	public void setTransaction(JSONObject transaction) {
-		this.transaction = transaction;
+	public void setResult(JSONObject result) {
+		this.result = result;
 	}
-
 
 }

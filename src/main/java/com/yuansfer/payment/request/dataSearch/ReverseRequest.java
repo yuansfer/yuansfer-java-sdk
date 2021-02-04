@@ -55,12 +55,11 @@ public class ReverseRequest extends YuanpayRequest<ReverseResponse> {
 	public ReverseResponse convertResponse(String ret) {
 		ReverseResponse response = new ReverseResponse();
 		JSONObject json = JSONObject.fromObject(ret);
+		if (null != json.get("result")) {
+			response.setResult(json.getJSONObject("result"));
+		}
 		response.setRetCode(json.getString("ret_code"));
 		response.setRetMsg(json.getString("ret_msg"));
-		
-		if (null != json.get("transaction")) {
-			response.setTransaction(json.getJSONObject("transaction"));
-		}
 		return response;
 	}
 

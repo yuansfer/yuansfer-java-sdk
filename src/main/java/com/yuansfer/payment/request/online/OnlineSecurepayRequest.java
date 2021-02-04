@@ -2,11 +2,7 @@ package com.yuansfer.payment.request.online;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuansfer.payment.enums.CurrencyEnums;
-import com.yuansfer.payment.enums.TerminalEnums;
-import com.yuansfer.payment.enums.VendorEnums;
 import com.yuansfer.payment.exception.YuanpayException;
-import com.yuansfer.payment.request.ParamValidator;
 import com.yuansfer.payment.request.RequestConstants;
 import com.yuansfer.payment.request.YuanpayRequest;
 import com.yuansfer.payment.response.online.OnlineSecurepayResponse;
@@ -15,23 +11,24 @@ import com.yuansfer.payment.utils.JSONUtils;
 import net.sf.json.JSONObject;
 
 /**
- * @author zhoukai
+ * @author yuansfer
  */
 public class OnlineSecurepayRequest extends YuanpayRequest<OnlineSecurepayResponse> {
 	 
 	private String amount;						//美金金额
-	private String rmbAmount;					//人民币金额
-	private String reference;					//商户支付流水号
 	private String currency;					//币种
+	private String settleCurrency;				//结算币种
+	private String reference;					//商户支付流水号
 	private String vendor;						//渠道
 	private String terminal;					//客户端类型 包括 ONLINE，WAP
-	private String description;					//订单描述，会展示在收银台页面
-	private String note;						//备注信息，会原样返回
 	private Integer timeout;					//过期时间
 	private String ipnUrl;						//异步回调地址
 	private String callbackUrl;					//同步回调地址
 	private String goodsInfo;					//商品信息，要求json格式
 	
+	private String description;					//订单描述，会展示在收银台页面
+	private String note;						//备注信息，会原样返回
+	private String osType;
 	//信用卡相关
 	private String creditType;
 	private Integer paymentCount;
@@ -43,13 +40,6 @@ public class OnlineSecurepayRequest extends YuanpayRequest<OnlineSecurepayRespon
 	}
 	public OnlineSecurepayRequest setAmount(String amount) {
 		this.amount = amount;
-		return this;
-	}
-	public String getRmbAmount() {
-		return rmbAmount;
-	}
-	public OnlineSecurepayRequest setRmbAmount(String rmbAmount) {
-		this.rmbAmount = rmbAmount;
 		return this;
 	}
 	public String getCurrency() {
@@ -146,19 +136,27 @@ public class OnlineSecurepayRequest extends YuanpayRequest<OnlineSecurepayRespon
 		return this;
 	}
 	
+	public String getSettleCurrency() {
+		return settleCurrency;
+	}
+	public OnlineSecurepayRequest setSettleCurrency(String settleCurrency) {
+		this.settleCurrency = settleCurrency;
+		return this;
+	}
+	public String getOsType() {
+		return osType;
+	}
+	public void setOsType(String osType) {
+		this.osType = osType;
+	}
+	
 	//数据校验
 	@Override
 	protected void dataValidate() {
 		//金额校验
-		if (StringUtils.isEmpty(this.amount) && StringUtils.isEmpty(this.rmbAmount)) {
-			throw new YuanpayException("amount and rmbAmount cannnot be null at the same time.");
-		} else if (StringUtils.isNotEmpty(this.amount) && StringUtils.isNotEmpty(this.rmbAmount)) {
-			throw new YuanpayException("amount and rmbAmount can't exist at the same time.");
-		} else if (StringUtils.isNotEmpty(this.amount)) {
-			ParamValidator.amountValidate("amount", this.amount);
-		} else {
-			ParamValidator.amountValidate("rmbAmount", this.rmbAmount);
-		}
+		if (StringUtils.isEmpty(this.amount)) {
+			throw new YuanpayException("amount missing");
+		}  
 		
 		
 		if (StringUtils.isEmpty(this.reference)) {
@@ -169,26 +167,19 @@ public class OnlineSecurepayRequest extends YuanpayRequest<OnlineSecurepayRespon
 		if (StringUtils.isEmpty(this.currency)) {
 			throw new YuanpayException("currency missing.");
 		}
-		if (!CurrencyEnums.USD.getValue().equals(this.currency)) {
-			throw new YuanpayException("only USD is supported yet.");
+		
+		if (StringUtils.isEmpty(this.settleCurrency)) {
+			throw new YuanpayException("settleCurrency missing");
 		}
 		
 		//vendor校验
 		if (StringUtils.isEmpty(this.vendor)) {
 			throw new YuanpayException("vendor missing.");
 		}
-		boolean vendorFlag = VendorEnums.containValidate(this.vendor);
-		if (!vendorFlag) {
-			throw new YuanpayException("data error: vendor.");
-		}
 		
 		//terminal校验
 		if (StringUtils.isEmpty(this.terminal)) {
 			throw new YuanpayException("terminal missing");
-		}
-		boolean terminalFlag = TerminalEnums.containValidate(this.terminal);
-		if (!terminalFlag) {
-			throw new YuanpayException("data error:terminal");
 		}
 		
 		//description,note校验

@@ -1,7 +1,7 @@
 package online;
 
 import com.yuansfer.payment.client.YuanpayClient;
-import com.yuansfer.payment.client.YuanpayV200Client;
+import com.yuansfer.payment.client.YuanpayV300Client;
 import com.yuansfer.payment.request.online.OnlineSecurepayRequest;
 import com.yuansfer.payment.response.online.OnlineSecurepayResponse;
 
@@ -12,7 +12,7 @@ import net.sf.json.JSONObject;
 public class OnlineTest {
 
 	public static void main(String[] args) {
-		YuanpayClient client = new YuanpayV200Client(InitYuanpayConfig.initMerchantConfig());
+		YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
 		
 		JSONArray goods = new JSONArray();
 		JSONObject item = new JSONObject();
@@ -24,11 +24,12 @@ public class OnlineTest {
 		OnlineSecurepayRequest request = new OnlineSecurepayRequest();
 		request.setAmount("0.01")
 				.setCurrency("USD")
+				.setSettleCurrency("USD")
 				.setVendor("alipay")
-				.setTerminal("ONLINE")
+				.setTerminal("WAP")
 				.setReference(System.nanoTime()+"")
 				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
-				.setCallbackUrl("http://zk-tys.yunkeguan.com/ttest/test2?status={status}")
+				.setCallbackUrl("http://zk-tys.yunkeguan.com/ttest/test2?status={status}&amount={amount}&transactionNo={transactionNo}")
 				.setDescription("testDescription")
 				.setNote("testNote")
 				.setGoodsInfo(goods.toString());

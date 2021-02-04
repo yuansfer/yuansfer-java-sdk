@@ -1,5 +1,10 @@
 package com.yuansfer.payment.enums;
 
+/**
+ * 
+ * @author yuansfer
+ *
+ */
 public enum EnviromentEnums {
 	SANDBOX("sandbox"),					//沙箱
 	PRODUCT("product"),					//生产

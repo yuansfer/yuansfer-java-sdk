@@ -17,6 +17,7 @@ public class AuthVoucherCreateRequest extends YuanpayRequest<AuthVoucherCreateRe
 	private String vendor;
 	private String amount;
 	private String currency;
+	private String settleCurrency;
 	
 	public String getOutAuthInfoNo() {
 		return outAuthInfoNo;
@@ -42,8 +43,9 @@ public class AuthVoucherCreateRequest extends YuanpayRequest<AuthVoucherCreateRe
 	public String getAmount() {
 		return amount;
 	}
-	public void setAmount(String amount) {
+	public AuthVoucherCreateRequest setAmount(String amount) {
 		this.amount = amount;
+		return this;
 	}
 	public String getCurrency() {
 		return currency;
@@ -53,6 +55,13 @@ public class AuthVoucherCreateRequest extends YuanpayRequest<AuthVoucherCreateRe
 		return this;
 	}
 	
+	public String getSettleCurrency() {
+		return settleCurrency;
+	}
+	public AuthVoucherCreateRequest setSettleCurrency(String settleCurrency) {
+		this.settleCurrency = settleCurrency;
+		return this;
+	}
 	
 	@Override
 	protected void dataValidate() {
@@ -85,6 +94,4 @@ public class AuthVoucherCreateRequest extends YuanpayRequest<AuthVoucherCreateRe
 		}
 		return response;
 	}
-	
-	
 }

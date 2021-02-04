@@ -2,7 +2,6 @@ package com.yuansfer.payment.request.offline;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuansfer.payment.enums.VendorEnums;
 import com.yuansfer.payment.exception.YuanpayException;
 import com.yuansfer.payment.request.RequestConstants;
 import com.yuansfer.payment.request.YuanpayRequest;
@@ -67,11 +66,7 @@ public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
 		}
 		if (StringUtils.isEmpty(this.vendor)) {
 			throw new YuanpayException("vendor missing");
-		} else {
-			if (!VendorEnums.containValidate(this.vendor)) {
-				throw new YuanpayException("data error:vendor");
-			}
-		}
+		} 
 	}
 
 	@Override
@@ -86,12 +81,11 @@ public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
 	public InstorePayResponse convertResponse(String ret) {
 		InstorePayResponse response = new InstorePayResponse();
 		JSONObject json = JSONObject.fromObject(ret);
+		if (null != json.get("result")) {
+			response.setResult(json.getJSONObject("result"));
+		}
 		response.setRetCode(json.getString("ret_code"));
 		response.setRetMsg(json.getString("ret_msg"));
-		
-		if (null != json.get("transaction")) {
-			response.setTransaction(json.getJSONObject("transaction"));
-		}
 		return response;
 	}
 	

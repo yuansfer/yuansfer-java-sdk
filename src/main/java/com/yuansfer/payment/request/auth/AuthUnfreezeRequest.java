@@ -12,10 +12,14 @@ import net.sf.json.JSONObject;
 
 public class AuthUnfreezeRequest extends YuanpayRequest<AuthUnfreezeResponse> {
 
+	private String authInfoNo;
 	private String outAuthInfoNo;
 	private String outAuthDetailNo;
 	private String unfreezeAmount;
 	private String authIpnUrl;
+	private String currency;
+	private String settleCurrency;
+	
 	public String getOutAuthInfoNo() {
 		return outAuthInfoNo;
 	}
@@ -44,14 +48,55 @@ public class AuthUnfreezeRequest extends YuanpayRequest<AuthUnfreezeResponse> {
 		this.authIpnUrl = authIpnUrl;
 		return this;
 	}
+	
+	
+	public String getAuthInfoNo() {
+		return authInfoNo;
+	}
+	public AuthUnfreezeRequest setAuthInfoNo(String authInfoNo) {
+		this.authInfoNo = authInfoNo;
+		return this;
+	}
+	public String getCurrency() {
+		return currency;
+	}
+	public AuthUnfreezeRequest setCurrency(String currency) {
+		this.currency = currency;
+		return this;
+	}
+	public String getSettleCurrency() {
+		return settleCurrency;
+	}
+	public AuthUnfreezeRequest setSettleCurrency(String settleCurrency) {
+		this.settleCurrency = settleCurrency;
+		return this;
+	}
+	
+	
 	@Override
 	protected void dataValidate() {
-		if (StringUtils.isEmpty(this.outAuthInfoNo)) {
-			throw new YuanpayException("outAuthInfoNo missing");
+		if (StringUtils.isEmpty(this.outAuthInfoNo) 
+				&& StringUtils.isEmpty(this.authInfoNo)) {
+			throw new YuanpayException("outAuthInfoNo and authInfoNo missing");
 		}
+		
+		if (StringUtils.isNotEmpty(this.outAuthDetailNo) 
+				&& StringUtils.isNotEmpty(this.authInfoNo)) {
+			throw new YuanpayException("outAuthInfoNo and authInfoNo cannot exist at the same time");
+		}
+			
+		
 		if (StringUtils.isEmpty(this.outAuthDetailNo)) {
 			throw new YuanpayException("outAuthDetailNo missing");
 		}
+		
+		if (StringUtils.isEmpty(this.currency)) {
+			throw new YuanpayException("currency missing");
+		}
+		if (StringUtils.isEmpty(this.settleCurrency)) {
+			throw new YuanpayException("settleCurrency missing");
+		}
+		
 		ParamValidator.amountValidate("unfreezeAmount", this.unfreezeAmount);
 	}
 	

@@ -2,8 +2,6 @@ package com.yuansfer.payment.request.offline;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.yuansfer.payment.enums.CurrencyEnums;
-import com.yuansfer.payment.enums.VendorEnums;
 import com.yuansfer.payment.request.ParamValidator;
 import com.yuansfer.payment.request.RequestConstants;
 import com.yuansfer.payment.request.YuanpayRequest;
@@ -118,17 +116,10 @@ public class ThirdpartAcquireCreateRequest extends YuanpayRequest<ThirdpartAcqui
 		if (StringUtils.isEmpty(this.currency)) {
 			throw new RuntimeException("currency missing");
 		}
-		if (!CurrencyEnums.USD.getValue().equals(this.currency)) {
-			throw new RuntimeException("only USD is supported yet.");
-		}
 		
 		//vendor校验
 		if (StringUtils.isEmpty(this.vendor)) {
 			throw new RuntimeException("vendor missing");
-		}
-		boolean vendorFlag = VendorEnums.containValidate(this.vendor);
-		if (!vendorFlag) {
-			throw new RuntimeException("data error: vendor.");
 		}
 		
 		//description,note校验

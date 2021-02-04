@@ -1,7 +1,7 @@
 package offline;
 
 import com.yuansfer.payment.client.YuanpayClient;
-import com.yuansfer.payment.client.YuanpayV200Client;
+import com.yuansfer.payment.client.YuanpayV300Client;
 import com.yuansfer.payment.config.YuanpayConfig;
 import com.yuansfer.payment.request.offline.InstoreAddRequest;
 import com.yuansfer.payment.request.offline.InstoreCashierAddRequest;
@@ -18,10 +18,10 @@ import net.sf.json.JSONObject;
 public class OfflineTest {
 
 	public static void main(String[] args) {
-		addPay();
+//		addPay();
 		
-//		tranQrcode();
-		
+		tranQrcode();
+//		
 //		cashierAdd();
 	}
 	
@@ -30,12 +30,13 @@ public class OfflineTest {
 	public static void cashierAdd() {
 		YuanpayConfig config = InitYuanpayConfig.initMerchantConfig();
 		config.setStoreAdminNo("3000140001");
-		YuanpayClient client = new YuanpayV200Client(config);
+		YuanpayClient client = new YuanpayV300Client(config);
 		
 		InstoreCashierAddRequest request = new InstoreCashierAddRequest();
 
 		request.setAmount("0.01")
 				.setCurrency("USD")
+				.setSettleCurrency("USD")
 				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
 				.setReference(System.nanoTime()+"");
 		
@@ -45,12 +46,13 @@ public class OfflineTest {
 	
 	
 	public static void tranQrcode() {
-		YuanpayClient client = new YuanpayV200Client(InitYuanpayConfig.initMerchantConfig());
+		YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
 		
 		InstoreCreateTranQrcodeRequest request = new InstoreCreateTranQrcodeRequest();
 		
 		request.setAmount("0.01")
 				.setCurrency("USD")
+				.setSettleCurrency("USD")
 				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
 				.setNeedQrcode("true")
 				.setReference(System.nanoTime()+"")
@@ -63,23 +65,24 @@ public class OfflineTest {
 	
 	
 	public static void addPay() {
-		YuanpayClient client = new YuanpayV200Client(InitYuanpayConfig.initMerchantConfig());
+		YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
 		
 		//add，pay流程
 		InstoreAddRequest addRequest = new InstoreAddRequest();
 		addRequest.setAmount("0.01")
 					.setCurrency("USD")
+					.setSettleCurrency("USD")
 					.setReference(System.nanoTime()+"");
 		
 		InstoreAddResponse addResponse = client.execute(addRequest);
 		System.out.println("add response:" + JSONObject.fromObject(addResponse));
 		
-		String transactionNo = addResponse.getTransaction().getString("transactionNo");
+		String transactionNo = addResponse.getResult().getString("transactionNo");
 		
 		InstorePayRequest payRequest = new InstorePayRequest();
 		payRequest.setTransactionNo(transactionNo)
 					.setVendor("alipay")
-					.setPaymentBarcode("281036155210403960");
+					.setPaymentBarcode("280946163113394921");
 		
 		InstorePayResponse payResponse = client.execute(payRequest);
 		System.out.println("pay response:" + JSONObject.fromObject(payResponse));

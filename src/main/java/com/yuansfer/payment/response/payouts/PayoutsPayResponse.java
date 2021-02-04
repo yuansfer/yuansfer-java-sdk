@@ -1,13 +1,12 @@
-package com.yuansfer.payment.response.dataSearch;
+package com.yuansfer.payment.response.payouts;
 
 import com.yuansfer.payment.response.YuanpayResponse;
 
 import net.sf.json.JSONObject;
 
-public class ReverseResponse extends YuanpayResponse {
+public class PayoutsPayResponse extends YuanpayResponse {
 
-	private static final long serialVersionUID = 4617089503725402504L;
-
+	private static final long serialVersionUID = -5374850524477752149L;
 	private JSONObject result;
 
 	public JSONObject getResult() {
@@ -17,5 +16,4 @@ public class ReverseResponse extends YuanpayResponse {
 	public void setResult(JSONObject result) {
 		this.result = result;
 	}
-
 }

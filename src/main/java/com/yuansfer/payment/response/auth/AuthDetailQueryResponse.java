@@ -1,12 +1,12 @@
-package com.yuansfer.payment.response.dataSearch;
+package com.yuansfer.payment.response.auth;
 
 import com.yuansfer.payment.response.YuanpayResponse;
 
 import net.sf.json.JSONObject;
 
-public class DataStatusResponse extends YuanpayResponse {
+public class AuthDetailQueryResponse extends YuanpayResponse {
 
-	private static final long serialVersionUID = -952788922977261023L;
+	private static final long serialVersionUID = -7784810535134344432L;
 	private JSONObject result;
 	
 	public JSONObject getResult() {
