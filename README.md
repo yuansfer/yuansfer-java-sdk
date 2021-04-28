@@ -42,7 +42,7 @@ JSONArray goods = new JSONArray();
 JSONObject item = new JSONObject();
 item.put("goods_name","name1");
 item.put("quantity", "1");
-goods.add(item); /Add product items to JSON Object with above format
+goods.add(item); //Add product items to JSON Object with above format
 
 OnlineSecurepayRequest request = new OnlineSecurepayRequest(); //Initialize Yuansfer SecurePay request object
 /**
