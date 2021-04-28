@@ -23,29 +23,31 @@ Please see [examples](https://github.com/yuansfer/yuansfer-java-sdk/tree/master/
 
 ### 1. Init
 ```java
-YuanpayConfig config = new YuanpayConfig();
-config.setEnv(EnviromentEnums.SANDBOX.getValue())
-      .setMerchantNo("200043")
-      .setStoreNo("300014")
-      .setToken("5cbfb079f15b150122261c8537086d77a");
+YuanpayConfig config = new YuanpayConfig(); //Initialize Yuansfer Configuration
+config.setEnv(EnviromentEnums.SANDBOX.getValue()) //Set Yuansfer to SandBox Environment, Possible Value: SANDBOX, PRODUCTION
+      .setMerchantNo("200043") //Set Yuansfer MerchantNo
+      .setStoreNo("300014") //Set Yuansfer StoreNo
+      .setToken("5cbfb079f15b150122261c8537086d77a"); //Set Yuansfer Token
 
-YuanpayClient client = new YuanpayV200Client(config);                
+YuanpayClient client = new YuanpayV200Client(config); //Initialize Yuansfer Client with above configuration                     
 ```
 
 
 
 ### 2. Online API
 ```java
-YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
+YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig()); //Initialize Yuansfer Client with default configuration   
 
 JSONArray goods = new JSONArray();
 JSONObject item = new JSONObject();
 item.put("goods_name","name1");
 item.put("quantity", "1");
-goods.add(item);
+goods.add(item); /Add product items to JSON Object with above format
 
-
-OnlineSecurepayRequest request = new OnlineSecurepayRequest();
+OnlineSecurepayRequest request = new OnlineSecurepayRequest(); //Initialize Yuansfer SecurePay request object
+/**
+* Assign required values to request body
+**/
 request.setAmount("0.01")
 		.setCurrency("USD")
 		.setSettleCurrency("USD")
@@ -64,10 +66,12 @@ System.out.println(JSONObject.fromObject(response));
 
 ### 2. Offline API
 ```java
-YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
+YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig()); //Initialize Yuansfer Client with default configuration  
 
-InstoreCreateTranQrcodeRequest request = new InstoreCreateTranQrcodeRequest();
-
+InstoreCreateTranQrcodeRequest request = new InstoreCreateTranQrcodeRequest(); //Initialize Yuansfer Instore Create Tran Qr Code request object
+/**
+* Assign required values to request body
+**/
 request.setAmount("0.01")
 		.setCurrency("USD")
 		.setSettleCurrency("USD")
@@ -77,14 +81,17 @@ request.setAmount("0.01")
 		.setTimeout(120)
 		.setVendor("alipay");
 
-InstoreCreateTranQrcodeResponse response = client.execute(request);
+InstoreCreateTranQrcodeResponse response = client.execute(request); //Make Instore Create Tran Qr Code request with above request body
 System.out.println(JSONObject.fromObject(response));
 ```
 
 ### 3. Mobile API
 ```java
-YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
-MobilePrepayRequest request = new MobilePrepayRequest();
+YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig()); //Initialize Yuansfer Client with default configuration  
+MobilePrepayRequest request = new MobilePrepayRequest(); //Initialize Yuansfer Mobile PrePay request object
+/**
+* Assign required values to request body
+**/
 request.setAmount("0.01")
 		.setCurrency("USD")
 		.setSettleCurrency("USD")
@@ -95,23 +102,25 @@ request.setAmount("0.01")
 		.setTerminal("APP")
 		.setVendor("alipay");
 
-MobilePrepayResponse response = client.execute(request);
+MobilePrepayResponse response = client.execute(request); //Make Mobile PrePay request with above request body
 System.out.println(JSONObject.fromObject(response));
 ```
 
-### 3. Data API
+### 4. Data API
 ```java
-YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
+YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig()); //Initialize Yuansfer Client with default configuration  
 		
-RefundRequest request = new RefundRequest();
-
+RefundRequest request = new RefundRequest(); //Initialize Yuansfer Refund request object
+/**
+* Assign required values to request body
+**/
 request.setRefundAmount("0.01")
 		.setCurrency("USD")
 		.setSettleCurrency("USD")
 		.setRefundReference("refund" + System.nanoTime())
 		.setTransactionNo("297553648150331212");
 		
-RefundResponse response = client.execute(request);
+RefundResponse response = client.execute(request); //Make Refund request with above request body
 System.out.println(JSONObject.fromObject(response));
 ```
 
