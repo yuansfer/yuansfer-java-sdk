@@ -3,11 +3,6 @@ package com.yuansfer.payment.client;
 import java.util.Map;
 
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.commons.httpclient.methods.RequestEntity;
-import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.apache.commons.httpclient.protocol.Protocol;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +12,7 @@ import com.yuansfer.payment.exception.YuanpayException;
 import com.yuansfer.payment.request.RequestBody;
 import com.yuansfer.payment.request.YuanpayRequest;
 import com.yuansfer.payment.response.YuanpayResponse;
-import com.yuansfer.payment.utils.HTTPSSecureProtocolSocketFactory;
+import com.yuansfer.payment.utils.OkHttpUtils;
 
 import net.sf.json.JSONObject;
 
@@ -36,20 +31,10 @@ public class YuanpayV300Client implements YuanpayClient {
 		this.yuanpayConfig = yuanpayConfig;
 	}
 	
-	public static HttpClient getDeafultClient() {
-		HttpClient client = new HttpClient();
-		client.getHttpConnectionManager().getParams().setConnectionTimeout(30000);
-		client.getHttpConnectionManager().getParams().setSoTimeout(30000);
-		return client;
-	}
 
 	@Override
 	public <T extends YuanpayResponse> T execute(YuanpayRequest<T> request) {
 		try {
-			HttpClient client = getDeafultClient();
-	        Protocol https = new Protocol("https", new HTTPSSecureProtocolSocketFactory(), 443);
-	        Protocol.registerProtocol("https", https);
-	        
 	        //关联配置
 	        if (null == yuanpayConfig) {
 	        	logger.error("missing config infomation.");
@@ -64,8 +49,6 @@ public class YuanpayV300Client implements YuanpayClient {
 			Map<String, String> params = requestBody.getParams();
 			
 	        //业务数据校验
-			PostMethod postMethod = new PostMethod(url);
-			
 			JSONObject jsonParams = null;
 			if (MapUtils.isNotEmpty(params)) {
 				jsonParams = JSONObject.fromObject(params);
@@ -73,11 +56,7 @@ public class YuanpayV300Client implements YuanpayClient {
 				jsonParams = new JSONObject();
 			}
 			String transJson = jsonParams.toString();
-			RequestEntity se = new StringRequestEntity(transJson, "application/json", "UTF-8");
-			postMethod.setRequestEntity(se);
-			client.executeMethod(postMethod);
-			
-			String responseBody = postMethod.getResponseBodyAsString();
+			String responseBody = OkHttpUtils.doJsonPost(url, transJson);
 			logger.info("yuansfer return:" + responseBody);
 			if (StringUtils.isEmpty(responseBody)) {
 				logger.error("yuansfer return null");
@@ -89,7 +68,6 @@ public class YuanpayV300Client implements YuanpayClient {
 		} catch (Exception e) {
 			throw new YuanpayException(e.getMessage());
 		} finally {
-			Protocol.unregisterProtocol("https");
 		}
 	}
 	
