@@ -6,11 +6,11 @@ import com.yuansfer.payment.config.YuanpayConfig;
 import com.yuansfer.payment.request.offline.InstoreAddRequest;
 import com.yuansfer.payment.request.offline.InstoreCashierAddRequest;
 import com.yuansfer.payment.request.offline.InstoreCreateTranQrcodeRequest;
-import com.yuansfer.payment.request.offline.InstorePayRequest;
+import com.yuansfer.payment.request.offline.InstorePrepayRequest;
 import com.yuansfer.payment.response.offline.InstoreAddResponse;
 import com.yuansfer.payment.response.offline.InstoreCashierAddResponse;
 import com.yuansfer.payment.response.offline.InstoreCreateTranQrcodeResponse;
-import com.yuansfer.payment.response.offline.InstorePayResponse;
+import com.yuansfer.payment.response.offline.InstorePrepayResponse;
 
 import common.InitYuanpayConfig;
 import net.sf.json.JSONObject;
@@ -79,12 +79,12 @@ public class OfflineTest {
 		
 		String transactionNo = addResponse.getResult().getString("transactionNo");
 		
-		InstorePayRequest payRequest = new InstorePayRequest();
+		InstorePrepayRequest payRequest = new InstorePrepayRequest();
 		payRequest.setTransactionNo(transactionNo)
 					.setVendor("alipay")
 					.setPaymentBarcode("280946163113394921");
 		
-		InstorePayResponse payResponse = client.execute(payRequest);
+		InstorePrepayResponse payResponse = client.execute(payRequest);
 		System.out.println("pay response:" + JSONObject.fromObject(payResponse));
 		
 	}
