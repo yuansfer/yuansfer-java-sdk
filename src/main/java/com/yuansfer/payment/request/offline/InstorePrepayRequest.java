@@ -5,12 +5,11 @@ import org.apache.commons.lang.StringUtils;
 import com.yuansfer.payment.exception.YuanpayException;
 import com.yuansfer.payment.request.RequestConstants;
 import com.yuansfer.payment.request.YuanpayRequest;
-import com.yuansfer.payment.response.offline.InstorePayResponse;
+import com.yuansfer.payment.response.offline.InstorePrepayResponse;
 
 import net.sf.json.JSONObject;
 
-@Deprecated
-public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
+public class InstorePrepayRequest extends YuanpayRequest<InstorePrepayResponse>{
 
 	private String transactionNo;						//订单号
 	private String reference;							//商户支付流水号
@@ -21,7 +20,7 @@ public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
 		return transactionNo;
 	}
 
-	public InstorePayRequest setTransactionNo(String transactionNo) {
+	public InstorePrepayRequest setTransactionNo(String transactionNo) {
 		this.transactionNo = transactionNo;
 		return this;
 	}
@@ -30,7 +29,7 @@ public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
 		return reference;
 	}
 
-	public InstorePayRequest setReference(String reference) {
+	public InstorePrepayRequest setReference(String reference) {
 		this.reference = reference;
 		return this;
 	}
@@ -39,7 +38,7 @@ public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
 		return paymentBarcode;
 	}
 
-	public InstorePayRequest setPaymentBarcode(String paymentBarcode) {
+	public InstorePrepayRequest setPaymentBarcode(String paymentBarcode) {
 		this.paymentBarcode = paymentBarcode;
 		return this;
 	}
@@ -48,7 +47,7 @@ public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
 		return vendor;
 	}
 
-	public InstorePayRequest setVendor(String vendor) {
+	public InstorePrepayRequest setVendor(String vendor) {
 		this.vendor = vendor;
 		return this;
 	}
@@ -73,14 +72,14 @@ public class InstorePayRequest extends YuanpayRequest<InstorePayResponse>{
 	@Override
 	protected String getAPIUrl(String env) {
 		String urlPrefix = getUrlPrefix(env);
-		String url = urlPrefix + RequestConstants.INSTORE_PAY;
+		String url = urlPrefix + RequestConstants.INSTORE_PREPAY;
 		return url;
 	}
 
 
 	@Override
-	public InstorePayResponse convertResponse(String ret) {
-		InstorePayResponse response = new InstorePayResponse();
+	public InstorePrepayResponse convertResponse(String ret) {
+		InstorePrepayResponse response = new InstorePrepayResponse();
 		JSONObject json = JSONObject.fromObject(ret);
 		if (null != json.get("result")) {
 			response.setResult(json.getJSONObject("result"));

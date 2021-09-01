@@ -4,8 +4,7 @@ import com.yuansfer.payment.response.YuanpayResponse;
 
 import net.sf.json.JSONObject;
 
-@Deprecated
-public class InstorePayResponse extends YuanpayResponse {
+public class InstorePrepayResponse extends YuanpayResponse {
 
 	private static final long serialVersionUID = 5387576527153647388L;
 	

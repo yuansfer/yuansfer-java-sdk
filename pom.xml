@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.yuansfer</groupId>
 	<artifactId>yuansfer-payment</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.1</version>
 	<name>yuansfer-payment-sdk</name>
 	<description>yuansfer-payment-sdk</description>
 

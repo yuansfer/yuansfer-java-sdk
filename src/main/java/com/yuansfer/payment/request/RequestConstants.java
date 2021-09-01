@@ -18,7 +18,8 @@ public interface RequestConstants {
 	 * instore接口后缀
 	 */
 	String INSTORE_ADD = "/app-instore/v3/add";
-	String INSTORE_PAY = "/app-instore/v3/pay";
+	@Deprecated String INSTORE_PAY = "/app-instore/v3/pay";
+	String INSTORE_PREPAY = "/app-instore/v3/prepay";
 	String INSTORE_TRAN_QRCODE = "/app-instore/v3/create-trans-qrcode";
 	String INSTORE_CASHIER_ADD = "/app-instore/v3/cashier-add";
 	String INSTORE_AUTH_CAPTURE = "/app-instore/v3/auth-capture";
