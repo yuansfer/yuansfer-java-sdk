@@ -66,23 +66,27 @@ System.out.println(JSONObject.fromObject(response));
 
 ### 2. Offline API
 ```java
-YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig()); //Initialize Yuansfer Client with default configuration  
+YuanpayClient client = new YuanpayV300Client(InitYuanpayConfig.initMerchantConfig());
+		
+//add，pay流程
+InstoreAddRequest addRequest = new InstoreAddRequest();
+addRequest.setAmount("0.01")
+			.setCurrency("USD")
+			.setSettleCurrency("USD")
+			.setReference(System.nanoTime()+"");
 
-InstoreCreateTranQrcodeRequest request = new InstoreCreateTranQrcodeRequest(); //Initialize Yuansfer Instore Create Tran Qr Code request object
-/**
-* Assign required values to request body
-**/
-request.setAmount("0.01")
-		.setCurrency("USD")
-		.setSettleCurrency("USD")
-		.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
-		.setNeedQrcode("true")
-		.setReference(System.nanoTime()+"")
-		.setTimeout(120)
-		.setVendor("alipay");
+InstoreAddResponse addResponse = client.execute(addRequest);
+System.out.println("add response:" + JSONObject.fromObject(addResponse));
 
-InstoreCreateTranQrcodeResponse response = client.execute(request); //Make Instore Create Tran Qr Code request with above request body
-System.out.println(JSONObject.fromObject(response));
+String transactionNo = addResponse.getResult().getString("transactionNo");
+
+InstorePrepayRequest payRequest = new InstorePrepayRequest();
+payRequest.setTransactionNo(transactionNo)
+			.setVendor("alipay")
+			.setPaymentBarcode("280946163113394921");
+
+InstorePrepayResponse payResponse = client.execute(payRequest);
+System.out.println("pay response:" + JSONObject.fromObject(payResponse));
 ```
 
 ### 3. Mobile API
