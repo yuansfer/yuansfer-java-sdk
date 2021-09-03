@@ -67,7 +67,8 @@ public class OkHttpUtils {
     }
 	
 	public static String doJsonPost(String url, String jsonParams) {
-        RequestBody requestBody = RequestBody.create(jsonParams, MediaType.parse("application/json; charset=utf-8"));
+        @SuppressWarnings("deprecation")
+		RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonParams);
         Request request = new Request.Builder().url(url).post(requestBody).build();
         return respStr(request);
     }
