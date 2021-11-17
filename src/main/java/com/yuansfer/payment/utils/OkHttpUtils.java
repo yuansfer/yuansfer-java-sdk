@@ -1,9 +1,16 @@
 package com.yuansfer.payment.utils;
 
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,22 +33,41 @@ public class OkHttpUtils {
 	
 	static {
 		ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.MODERN_TLS)
-			    .tlsVersions(TlsVersion.TLS_1_2)
+			    .tlsVersions(TlsVersion.TLS_1_2, TlsVersion.TLS_1_3)
 			    .cipherSuites(
 			          CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
 			          CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
 			          CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256)
 			    .build();
+		X509TrustManager x509TrustManager = systemDefaultTrustManager();
+		HTTPSSocketFactory httpsSocketFactory = new HTTPSSocketFactory(x509TrustManager);
 		okHttpClient = new OkHttpClient.Builder()
 			    .connectionSpecs(Collections.singletonList(spec))
 			    .retryOnConnectionFailure(false)
-			    .connectionPool(new ConnectionPool(5, 3, TimeUnit.MINUTES))
+			    .connectionPool(new ConnectionPool(3, 45, TimeUnit.SECONDS))
 			    .connectTimeout(10, TimeUnit.SECONDS)
 			    .readTimeout(20, TimeUnit.SECONDS)
 			    .writeTimeout(20, TimeUnit.SECONDS)
+			    .sslSocketFactory(httpsSocketFactory, x509TrustManager)
 			    .build();
 		okHttpClient.dispatcher().setMaxRequestsPerHost(1000);
 		okHttpClient.dispatcher().setMaxRequests(1000);
+	}
+	
+	private static X509TrustManager systemDefaultTrustManager() {
+	    try {
+	      TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(
+	          TrustManagerFactory.getDefaultAlgorithm());
+	      trustManagerFactory.init((KeyStore) null);
+	      TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
+	      if (trustManagers.length != 1 || !(trustManagers[0] instanceof X509TrustManager)) {
+	        throw new IllegalStateException("Unexpected default trust managers:"
+	            + Arrays.toString(trustManagers));
+	      }
+	      return (X509TrustManager) trustManagers[0];
+	    } catch (GeneralSecurityException e) {
+	      throw new AssertionError(); // The system has no TLS. Just give up.
+	    }
 	}
 	
 	public static String doGet(String url, Map<String, String> params) {
