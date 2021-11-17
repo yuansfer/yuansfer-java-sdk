@@ -13,7 +13,7 @@
 <dependency>
     <groupId>com.yuansfer</groupId>
     <artifactId>yuansfer-payment</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
 </dependency>
 ```
 
