@@ -5,7 +5,7 @@
 
 ## Requirements
 
-- JAVA >= 1.6
+- JAVA >= 1.8
 
 
 ## Installation
