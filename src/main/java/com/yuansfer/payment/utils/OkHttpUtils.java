@@ -44,7 +44,7 @@ public class OkHttpUtils {
 		okHttpClient = new OkHttpClient.Builder()
 			    .connectionSpecs(Collections.singletonList(spec))
 			    .retryOnConnectionFailure(false)
-			    .connectionPool(new ConnectionPool(3, 45, TimeUnit.SECONDS))
+			    .connectionPool(new ConnectionPool(5, 45, TimeUnit.SECONDS))
 			    .connectTimeout(10, TimeUnit.SECONDS)
 			    .readTimeout(20, TimeUnit.SECONDS)
 			    .writeTimeout(20, TimeUnit.SECONDS)
