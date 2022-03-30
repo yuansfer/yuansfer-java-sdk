@@ -18,12 +18,9 @@ public interface RequestConstants {
 	 * instore接口后缀
 	 */
 	String INSTORE_ADD = "/app-instore/v3/add";
-	@Deprecated String INSTORE_PAY = "/app-instore/v3/pay";
 	String INSTORE_PREPAY = "/app-instore/v3/prepay";
 	String INSTORE_TRAN_QRCODE = "/app-instore/v3/create-trans-qrcode";
 	String INSTORE_CASHIER_ADD = "/app-instore/v3/cashier-add";
-	String INSTORE_AUTH_CAPTURE = "/app-instore/v3/auth-capture";
-	String INSTORE_AUTH_UNFREEZE = "/app-instore/v3/auth-unfreeze";
 	
 	/*
 	 * mobile接口后缀
@@ -35,19 +32,16 @@ public interface RequestConstants {
 	 * data-search
 	 */
 	String REFUND = "/app-data-search/v3/refund";
-	String REVERSE = "/app-data-search/v3/reverse";
+	String CANCEL = "/app-data-search/v3/cancel";
 	String TRAN_QUERY = "/app-data-search/v3/tran-query";
-	String TRANS_LIST = "/app-data-search/v3/trans-list";
-	String SETTLE_LIST = "/app-data-search/v3/settle-list";
-	String WITHDRAWAL_LIST = "/app-data-search/v3/withdrawal-list";
-	String DATA_STATUS = "/app-data-search/v3/data-status";
+
 	
 	
 	/*
 	 * 预授权
 	 */
 	String AUTH_VOUCHER_CREATE = "/app-auth/v3/voucher-create";
-	String AUTH_FREEAE = "/app-auth/v3/auth-freeze";
+	String AUTH_FREEZE = "/app-auth/v3/auth-freeze";
 	String AUTH_UNFREEZE = "/app-auth/v3/auth-unfreeze";
 	String AUTH_CAPTURE = "/app-auth/v3/auth-capture";
 	String AUTH_DETAIL_QUERY = "/app-auth/v3/auth-detail-query";

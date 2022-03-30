@@ -98,7 +98,7 @@ public class ThirdpartAcquireCreateRequest extends YuanpayRequest<ThirdpartAcqui
 	protected void dataValidate() {
 		//金额校验
 		if (StringUtils.isEmpty(this.amount) && StringUtils.isEmpty(this.rmbAmount)) {
-			throw new RuntimeException("amount and rmbAmount cannnot be null at the same time.");
+			throw new RuntimeException("amount and rmbAmount cannot be null at the same time.");
 		} else if (StringUtils.isNotEmpty(this.amount) && StringUtils.isNotEmpty(this.rmbAmount)) {
 			throw new RuntimeException("amount and rmbAmount can't exist at the same time.");
 		} else if (StringUtils.isNotEmpty(this.amount)) {

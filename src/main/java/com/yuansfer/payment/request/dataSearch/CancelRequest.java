@@ -5,11 +5,11 @@ import org.apache.commons.lang.StringUtils;
 import com.yuansfer.payment.exception.YuanpayException;
 import com.yuansfer.payment.request.RequestConstants;
 import com.yuansfer.payment.request.YuanpayRequest;
-import com.yuansfer.payment.response.dataSearch.ReverseResponse;
+import com.yuansfer.payment.response.dataSearch.CancelResponse;
 
 import net.sf.json.JSONObject;
 
-public class ReverseRequest extends YuanpayRequest<ReverseResponse> {
+public class CancelRequest extends YuanpayRequest<CancelResponse> {
 
 	private String transactionNo;
 	private String reference;
@@ -18,7 +18,7 @@ public class ReverseRequest extends YuanpayRequest<ReverseResponse> {
 		return transactionNo;
 	}
 
-	public ReverseRequest setTransactionNo(String transactionNo) {
+	public CancelRequest setTransactionNo(String transactionNo) {
 		this.transactionNo = transactionNo;
 		return this;
 	}
@@ -27,7 +27,7 @@ public class ReverseRequest extends YuanpayRequest<ReverseResponse> {
 		return reference;
 	}
 
-	public ReverseRequest setReference(String reference) {
+	public CancelRequest setReference(String reference) {
 		this.reference = reference;
 		return this;
 	}
@@ -46,14 +46,14 @@ public class ReverseRequest extends YuanpayRequest<ReverseResponse> {
 	@Override
 	protected String getAPIUrl(String env) {
 		String urlPrefix = getUrlPrefix(env);
-		String url = urlPrefix + RequestConstants.REVERSE;
+		String url = urlPrefix + RequestConstants.CANCEL;
 		return url;
 	}
 
 
 	@Override
-	public ReverseResponse convertResponse(String ret) {
-		ReverseResponse response = new ReverseResponse();
+	public CancelResponse convertResponse(String ret) {
+		CancelResponse response = new CancelResponse();
 		JSONObject json = JSONObject.fromObject(ret);
 		if (null != json.get("result")) {
 			response.setResult(json.getJSONObject("result"));

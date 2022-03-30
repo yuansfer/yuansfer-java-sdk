@@ -64,9 +64,6 @@ public class InstorePrepayRequest extends YuanpayRequest<InstorePrepayResponse>{
 		if (StringUtils.isEmpty(this.paymentBarcode)) {
 			throw new YuanpayException("paymentBarcode missing");
 		}
-		if (StringUtils.isEmpty(this.vendor)) {
-			throw new YuanpayException("vendor missing");
-		} 
 	}
 
 	@Override
