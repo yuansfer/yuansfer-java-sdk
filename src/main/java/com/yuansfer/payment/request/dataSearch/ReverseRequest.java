@@ -46,7 +46,7 @@ public class ReverseRequest extends YuanpayRequest<ReverseResponse> {
 	@Override
 	protected String getAPIUrl(String env) {
 		String urlPrefix = getUrlPrefix(env);
-		String url = urlPrefix + RequestConstants.REVERSE;
+		String url = urlPrefix + RequestConstants.CANCEL;
 		return url;
 	}
 

@@ -113,7 +113,7 @@ public class AuthFreezeRequest extends YuanpayRequest<AuthFreezeResponse> {
 	@Override
 	protected String getAPIUrl(String env) {
 		String urlPrefix = getUrlPrefix(env);
-		String url = urlPrefix + RequestConstants.AUTH_FREEAE;
+		String url = urlPrefix + RequestConstants.AUTH_FREEZE;
 		return url;
 	}
 	

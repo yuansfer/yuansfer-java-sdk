@@ -35,7 +35,7 @@ public class TranQueryRequest extends YuanpayRequest<TranQueryResponse> {
 	@Override
 	protected void dataValidate() {
 		if (StringUtils.isEmpty(this.transactionNo) && StringUtils.isEmpty(this.reference)) {
-			throw new RuntimeException("transaction and reference cannnot be null at the same time");
+			throw new RuntimeException("transaction and reference cannot be null at the same time");
 		}
 		if (StringUtils.isNotEmpty(this.transactionNo) && StringUtils.isNotEmpty(this.reference)) {
 			throw new RuntimeException("transaction and reference cannot exist at the same time");

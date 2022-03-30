@@ -6,5 +6,5 @@ import com.yuansfer.payment.response.YuanpayResponse;
 
 public interface YuanpayClient {
 	
-	public <T extends YuanpayResponse> T execute(YuanpayRequest<T> request) throws YuanpayException;
+	<T extends YuanpayResponse> T execute(YuanpayRequest<T> request) throws YuanpayException;
 }

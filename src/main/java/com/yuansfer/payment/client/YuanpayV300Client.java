@@ -37,8 +37,8 @@ public class YuanpayV300Client implements YuanpayClient {
 		try {
 	        //关联配置
 	        if (null == yuanpayConfig) {
-	        	logger.error("missing config infomation.");
-	        	throw new YuanpayException("missiong config infomation.");
+	        	logger.error("missing config information.");
+	        	throw new YuanpayException("missing config information.");
 	        } else {
 	        	//基础权限数据校验
 	        	yuanpayConfig.basicValidate();
@@ -49,7 +49,7 @@ public class YuanpayV300Client implements YuanpayClient {
 			Map<String, String> params = requestBody.getParams();
 			
 	        //业务数据校验
-			JSONObject jsonParams = null;
+			JSONObject jsonParams;
 			if (MapUtils.isNotEmpty(params)) {
 				jsonParams = JSONObject.fromObject(params);
 			} else {
@@ -63,8 +63,7 @@ public class YuanpayV300Client implements YuanpayClient {
 				throw new YuanpayException("fail to connect");
 			}
 			//解析返回
-			T t = request.convertResponse(responseBody);
-			return t;
+			return request.convertResponse(responseBody);
 		} catch (Exception e) {
 			throw new YuanpayException(e.getMessage());
 		} finally {

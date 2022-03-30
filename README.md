@@ -13,7 +13,7 @@
 <dependency>
     <groupId>com.yuansfer</groupId>
     <artifactId>yuansfer-payment</artifactId>
-    <version>3.0.2</version>
+    <version>3.0.4</version>
 </dependency>
 ```
 
@@ -82,7 +82,6 @@ String transactionNo = addResponse.getResult().getString("transactionNo");
 
 InstorePrepayRequest payRequest = new InstorePrepayRequest();
 payRequest.setTransactionNo(transactionNo)
-			.setVendor("alipay")
 			.setPaymentBarcode("280946163113394921");
 
 InstorePrepayResponse payResponse = client.execute(payRequest);
