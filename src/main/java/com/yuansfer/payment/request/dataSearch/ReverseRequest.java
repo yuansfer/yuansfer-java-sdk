@@ -5,11 +5,11 @@ import org.apache.commons.lang.StringUtils;
 import com.yuansfer.payment.exception.YuanpayException;
 import com.yuansfer.payment.request.RequestConstants;
 import com.yuansfer.payment.request.YuanpayRequest;
-import com.yuansfer.payment.response.dataSearch.CancelResponse;
+import com.yuansfer.payment.response.dataSearch.ReverseResponse;
 
 import net.sf.json.JSONObject;
 
-public class CancelRequest extends YuanpayRequest<CancelResponse> {
+public class ReverseRequest extends YuanpayRequest<ReverseResponse> {
 
 	private String transactionNo;
 	private String reference;
@@ -18,7 +18,7 @@ public class CancelRequest extends YuanpayRequest<CancelResponse> {
 		return transactionNo;
 	}
 
-	public CancelRequest setTransactionNo(String transactionNo) {
+	public ReverseRequest setTransactionNo(String transactionNo) {
 		this.transactionNo = transactionNo;
 		return this;
 	}
@@ -27,7 +27,7 @@ public class CancelRequest extends YuanpayRequest<CancelResponse> {
 		return reference;
 	}
 
-	public CancelRequest setReference(String reference) {
+	public ReverseRequest setReference(String reference) {
 		this.reference = reference;
 		return this;
 	}
@@ -52,8 +52,8 @@ public class CancelRequest extends YuanpayRequest<CancelResponse> {
 
 
 	@Override
-	public CancelResponse convertResponse(String ret) {
-		CancelResponse response = new CancelResponse();
+	public ReverseResponse convertResponse(String ret) {
+		ReverseResponse response = new ReverseResponse();
 		JSONObject json = JSONObject.fromObject(ret);
 		if (null != json.get("result")) {
 			response.setResult(json.getJSONObject("result"));

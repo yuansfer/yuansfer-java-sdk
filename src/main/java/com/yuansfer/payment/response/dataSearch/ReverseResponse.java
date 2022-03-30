@@ -4,7 +4,7 @@ import com.yuansfer.payment.response.YuanpayResponse;
 
 import net.sf.json.JSONObject;
 
-public class CancelResponse extends YuanpayResponse {
+public class ReverseResponse extends YuanpayResponse {
 
 	private static final long serialVersionUID = 4617089503725402504L;
 
