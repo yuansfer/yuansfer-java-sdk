@@ -18,9 +18,9 @@ import net.sf.json.JSONObject;
 public class OfflineTest {
 
 	public static void main(String[] args) {
-//		addPay();
+		addPay();
 		
-		tranQrcode();
+//		tranQrcode();
 //		
 //		cashierAdd();
 	}
@@ -81,8 +81,7 @@ public class OfflineTest {
 		
 		InstorePrepayRequest payRequest = new InstorePrepayRequest();
 		payRequest.setTransactionNo(transactionNo)
-					.setVendor("alipay")
-					.setPaymentBarcode("280946163113394921");
+					.setPaymentBarcode("134668918993771844");
 		
 		InstorePrepayResponse payResponse = client.execute(payRequest);
 		System.out.println("pay response:" + JSONObject.fromObject(payResponse));
