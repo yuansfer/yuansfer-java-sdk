@@ -29,7 +29,10 @@ public class OnlineSecurepayRequest extends YuanpayRequest<OnlineSecurepayRespon
 	private String description;					//订单描述，会展示在收银台页面
 	private String note;						//备注信息，会原样返回
 	private String osType;
+	private String osVersion;
+	private String appId;
 	//信用卡相关
+	private String customerNo;
 	private String creditType;
 	private Integer paymentCount;
 	private Integer frequency;
@@ -146,10 +149,35 @@ public class OnlineSecurepayRequest extends YuanpayRequest<OnlineSecurepayRespon
 	public String getOsType() {
 		return osType;
 	}
-	public void setOsType(String osType) {
+	public OnlineSecurepayRequest setOsType(String osType) {
 		this.osType = osType;
+		return this;
 	}
-	
+
+	public String getOsVersion() {
+		return osVersion;
+	}
+	public OnlineSecurepayRequest setOsVersion(String osVersion) {
+		this.osVersion = osVersion;
+		return this;
+	}
+
+	public String getAppId() {
+		return appId;
+	}
+	public OnlineSecurepayRequest setAppId(String appId) {
+		this.appId = appId;
+		return this;
+	}
+
+	public String getCustomerNo() {
+		return customerNo;
+	}
+	public OnlineSecurepayRequest setCustomerNo(String customerNo) {
+		this.customerNo = customerNo;
+		return this;
+	}
+
 	//数据校验
 	@Override
 	protected void dataValidate() {
