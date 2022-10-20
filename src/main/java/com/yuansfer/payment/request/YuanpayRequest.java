@@ -15,7 +15,7 @@ import com.yuansfer.payment.utils.Md5Utils;
 import com.yuansfer.payment.utils.ReflectUtils;
 
 /**
- * @author zhoukai
+ * @author yuansfer
  */
 public abstract class YuanpayRequest<T extends YuanpayResponse> {
 	
@@ -58,10 +58,10 @@ public abstract class YuanpayRequest<T extends YuanpayResponse> {
 	 */
 	protected Map<String, String> convertToRequestParam() {
 		if (null == this.config) {
-			throw new YuanpayException("missing config infomation.");
+			throw new YuanpayException("missing config information.");
 		}
 		
-		List<String> ignores = new ArrayList<String>();
+		List<String> ignores = new ArrayList<>();
 		ignores.add("config");
 		Map<String, String> map = ReflectUtils.obj2map(this, ignores);
 		
@@ -72,7 +72,7 @@ public abstract class YuanpayRequest<T extends YuanpayResponse> {
 		}
 		
 		String str = MapUrlUtils.getUrlParamsByMap(map);
-		str = str + "&" + Md5Utils.cryptHash((config.getToken() + "").trim());//这里传递instoreToken
+		str = str + "&" + Md5Utils.cryptHash((config.getToken() + "").trim());
 		String verifySign = Md5Utils.cryptHash(str);
 		map.put("verifySign", verifySign);
 		return map;
