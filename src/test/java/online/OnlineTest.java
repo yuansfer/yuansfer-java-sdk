@@ -26,7 +26,7 @@ public class OnlineTest {
 				.setCurrency("USD")
 				.setSettleCurrency("USD")
 				.setVendor("alipay")
-				.setTerminal("WAP")
+				.setTerminal("ONLINE")
 				.setReference(System.nanoTime()+"")
 				.setIpnUrl("http://zk-tys.yunkeguan.com/ttest/test")
 				.setCallbackUrl("http://zk-tys.yunkeguan.com/ttest/test2?status={status}&amount={amount}&transactionNo={transactionNo}")
